@@ -29,6 +29,27 @@ jobs:
           name: pyrage-dists-linux
           path: dist/
 
+  release-linux-arm:
+    name: build Linux arm release dists
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: pyproject.toml
+
+      - name: build wheels
+        run: make dist-pyrage
+
+      - name: upload linux dists
+        uses: actions/upload-artifact@v4
+        with:
+          name: pyrage-dists-linux-arm
+          path: dist/
+
   release-macos:
     name: build macOS release dists
     runs-on: macos-latest
@@ -94,6 +115,7 @@ jobs:
       contents: write
     needs:
       - release-linux
+      - release-linux-arm
       - release-macos
       - release-windows
 
