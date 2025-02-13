@@ -31,7 +31,7 @@ jobs:
 
   release-linux-arm:
     name: build Linux arm release dists
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-22.04-arm
     steps:
       - uses: actions/checkout@v4
         with:
